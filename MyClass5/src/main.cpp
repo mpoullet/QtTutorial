@@ -44,12 +44,7 @@ int main(int argc, char *argv[])
 	printMyClass(*b);
 	printMyClass(*c);
 
-	QtSoapHttpTransport http;
-
-	http.setHost("192.168.178.1");
-	http.setAction("urn:");
-
-	QtSoapMessage 
+	QtSoapHttpTransport http = new QtSoapHttpTransport(&app);
 
 	return 0;
 }
