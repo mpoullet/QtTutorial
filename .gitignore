@@ -4,3 +4,4 @@
 *.ilk
 *.pdb
 /ipch/
+*.opensdf
