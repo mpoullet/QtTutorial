@@ -4,6 +4,9 @@
 #include <QtSoapHttpTransport>
 #include <QAuthenticator>
 #include <QNetworkReply>
+#include <QNetworkProxy>
+#include <QList>
+#include <QSslError>
 #include <QCheckBox>
 
 class QLineEdit;
@@ -17,11 +20,14 @@ public:
 	SoapWidget(QWidget *parent = 0);
 
 private slots:
-	void submitRequest();
-	void getResponse();
-	void getAuthentication(QNetworkReply*, QAuthenticator*);
+		void submitRequest();
+		void getResponse();
+		void getAuthentication(QNetworkReply*, QAuthenticator*);
+		void getSslErrors(QNetworkReply*, QList<QSslError>);
+		void getProxyAuthentication(QNetworkProxy, QAuthenticator*);
 
 private:
+	static const QString host;
 	QtSoapHttpTransport http;
 
 	QLineEdit *portString;

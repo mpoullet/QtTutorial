@@ -10,6 +10,8 @@
 
 #include "SoapWidget.h"
 
+const QString SoapWidget::host = "192.168.178.1";
+
 SoapWidget::SoapWidget(QWidget *parent)
 	: QWidget(parent), http(this)
 {
@@ -60,21 +62,25 @@ SoapWidget::SoapWidget(QWidget *parent)
 	connect(controlURLString, SIGNAL(returnPressed()), SLOT(submitRequest()));
 	connect(searchButton, SIGNAL(clicked()), SLOT(submitRequest()));
 	connect(http.networkAccessManager(), SIGNAL(authenticationRequired(QNetworkReply*,QAuthenticator*)), SLOT(getAuthentication(QNetworkReply*,QAuthenticator*)));
+	connect(http.networkAccessManager(), SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), SLOT(getSslErrors(QNetworkReply*,QList<QSslError>)));
+	connect(http.networkAccessManager(), SIGNAL(proxyAuthenticationRequired(QNetworkProxy,QAuthenticator*)), SLOT(getProxyAuthentication(QNetworkProxy,QAuthenticator*)));
 
 	// Pressing enter should trigger a search, unless focus has been
 	// explicitly moved.
 	searchButton->setDefault(true);
 
 	// Default request
-	namespaceString->setText("urn:dslforum-org:service:DeviceInfo:1");
-	soapMethodString->setText("GetSecurityPort");
-	controlURLString->setText("/upnp/control/deviceinfo");
-	portString->setText("49000");
-	useSSL->setChecked(false);
+	//namespaceString->setText("urn:dslforum-org:service:DeviceInfo:1");
+	//soapMethodString->setText("GetSecurityPort");
+	//controlURLString->setText("/upnp/control/deviceinfo");
+	//portString->setText("49000");
+	//useSSL->setChecked(false);
 
-	//namespaceString->setText("urn:dslforum-org:service:WLANConfiguration:1");
-	//soapMethodString->setText("GetGenericAssociatedDeviceInfo");
-	//controlURLString->setText("/upnp/control/wlanconfig1");
+	namespaceString->setText("urn:dslforum-org:service:X_VoIP:1");
+	soapMethodString->setText("X_AVM-DE_GetClient2");
+	controlURLString->setText("/upnp/control/x_voip");
+	portString->setText("49443");
+	useSSL->setChecked(true);
 }
 
 void SoapWidget::submitRequest()
@@ -108,10 +114,19 @@ void SoapWidget::submitRequest()
 	QString soapMethod = "u:" + soapMethodString->text();
 	request.setMethod(QtSoapQName(soapMethod, namespaceString->text()));
 
+	// TODO: Add Method from the GUI??
+	request.addMethodArgument("NewX_AVM-DE_ClientIndex", "", 0);
+
 	QString soapAction = namespaceString->text() + "#" + soapMethodString->text();
+	qDebug() << "SOAPACTION: " << soapAction;
 	http.setAction(soapAction);
-	http.setHost("192.168.178.1", useSSL->isChecked(), portString->text().toInt());
+
+	qDebug() << "Host: " << host << ":" << portString->text();
+	qDebug() << "SSL: " << useSSL->isChecked();
+	http.setHost(host, useSSL->isChecked(), portString->text().toInt());
 	http.submitRequest(request, controlURLString->text());
+
+	qDebug() << "\n" << request.toXmlString() << "\n";
 
 	// Set the cursor to wait mode.
 	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -128,8 +143,9 @@ void SoapWidget::getResponse()
 	// Get the response, check for error.
 	const QtSoapMessage &resp = http.getResponse();
 	if (resp.isFault()) {
-		resultView->setHtml(tr("<b>Request failed</b>: ")
-			+ resp.faultString().value().toString());
+		//resultView->setHtml(tr("<b>Request failed</b>: ")
+		//	+ resp.faultString().value().toString());
+		resultView->setHtml(resp.toXmlString());
 		return;
 	}
 
@@ -147,7 +163,27 @@ void SoapWidget::getResponse()
 
 void SoapWidget::getAuthentication(QNetworkReply *reply, QAuthenticator *ator)
 {
-    resultView->setText(reply->readAll());
-    ator->setUser(QString("avm"));
-    ator->setPassword(QString("avmavm"));
+	qDebug() << __FUNCTION__ << ": " << reply->readAll();
+
+	resultView->append(reply->readAll());
+	ator->setUser(QString("avm"));
+	ator->setPassword(QString("avmavm"));
+}
+
+void SoapWidget::getSslErrors(QNetworkReply *reply, QList<QSslError> sslErrors)
+{
+	QSslError error;
+	foreach ( error, sslErrors ) {
+		qDebug() << __FUNCTION__ << ": SSL error: " << error.errorString();
+	}
+
+	reply->ignoreSslErrors();
+	resultView->append(reply->readAll());
+}
+
+void SoapWidget::getProxyAuthentication(QNetworkProxy proxy, QAuthenticator *ator)
+{
+	qDebug() << __FUNCTION__ << ": " << proxy.hostName();
+
+	resultView->append(proxy.hostName());
 }
