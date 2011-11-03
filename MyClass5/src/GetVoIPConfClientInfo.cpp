@@ -66,7 +66,9 @@ bool GetVoIPConfClientInfo::endElement( const QString&, const QString&, const QS
 		item->setTextAlignment(1, Qt::AlignLeft);
 	}
 	else if (qName == "NewX_AVM-DE_ClientId") {
-		item->setText(1, itemText);
+		if (itemText.isEmpty())
+			item->setText(1, "");
+		else item->setText(1, itemText);
 		item->setTextAlignment(1, Qt::AlignLeft);
 	}
 	else if (qName == "NewX_AVM-DE_OutGoingNumber") {

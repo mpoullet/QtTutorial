@@ -26,7 +26,7 @@ SoapWidget::SoapWidget(QWidget *parent)
 	soapMethodString = new QLineEdit(this);
 	controlURLString = new QLineEdit(this);
 
-	resultView = new QTextBrowser(this);
+	resultView = new QTextEdit(this);
 	treeWidget = new QTreeWidget(this);
 	QStringList labels;
 	labels << tr("Parameter") << tr("Value");
@@ -156,7 +156,7 @@ void SoapWidget::getResponse()
 	if (resp.isFault()) {
 		//resultView->setHtml(tr("<b>Request failed</b>: ")
 		//	+ resp.faultString().value().toString());
-		resultView->setHtml(resp.toXmlString());
+		resultView->setText(resp.toXmlString());
 		return;
 	}
 
@@ -169,7 +169,7 @@ void SoapWidget::getResponse()
 	}
 
 	// Update the resultView.
-	resultView->setHtml(resp.toXmlString());
+	resultView->setText(resp.toXmlString());
 
 	QXmlSimpleReader xmlReader;
 	QXmlInputSource *source = new QXmlInputSource;

@@ -61,6 +61,15 @@
     <ClCompile Include="src\GetVoIPConfClientInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Call.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Call.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ContactNumber.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="src\MyClass.h">
@@ -81,6 +90,9 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="src\GetVoIPConfClientInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ContactNumber.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

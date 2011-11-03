@@ -9,6 +9,7 @@
 #include <QSslError>
 #include <QCheckBox>
 #include <QTreeWidget>
+#include <QTextEdit>
 
 class QLineEdit;
 class QTextBrowser;
@@ -36,7 +37,7 @@ private:
 	QLineEdit *namespaceString;
 	QLineEdit *soapMethodString;
 	QLineEdit *controlURLString;
-	QTextBrowser *resultView;
+	QTextEdit *resultView;
 	QPushButton *quitButton;
 	QPushButton *requestButton;
 	QTreeWidget *treeWidget;
