@@ -29,12 +29,12 @@ public:
 	
 	enum CALL_TYPE
 	{
-		MISSED, INCOMING, OUTGOING, UNSPECIFIED
+		MISSED, INCOMING, OUTGOING, UNSPECIFIED_CALL
 	};
 
 	enum EXTERN_PORT_TYPE
 	{
-		FIXEDLINE, SIP, MOBILE, UNSPECIFIED
+		FIXEDLINE, SIP, MOBILE, UNSPECIFIED_PORT
 	};
 
 	/**
@@ -45,7 +45,7 @@ public:
 	 * 
 	 * @return the call type for key
 	 */
-	static CALL_TYPE getCallTypeForKey(QString);
+	static CALL_TYPE getCallTypeForKey(const QString&);
 
 	void setCalledNumber(const QString&);
 	const QString& getCalledNumber() const;

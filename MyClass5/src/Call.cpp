@@ -4,9 +4,9 @@
 * Instantiates a new call.
 */
 Call::Call() {
-	mType = Call::CALL_TYPE.UNSPECIFIED;
+	mType = Call::UNSPECIFIED_CALL;
 	mCount = 0;
-	mNumberType = ContactNumber::NUMBER_TYPE.OTHER;
+	mNumberType = ContactNumber::OTHER;
 	mDuration = 0; // in minutes
 }
 
@@ -18,21 +18,23 @@ Call::Call() {
 * 
 * @return the call type for key
 */
-Call::CALL_TYPE Call::getCallTypeForKey(QString aQString)
+Call::CALL_TYPE Call::getCallTypeForKey(const QString& aQString)
 {
-	switch (Integer.parseInt(aQString))
+	switch (aQString.toInt())
 	{
-	case 1: return Call::CALL_TYPE.INCOMING;
-	case 2: return Call::CALL_TYPE.MISSED;
-	case 3: return Call::CALL_TYPE.OUTGOING;
+	case 1: return Call::INCOMING;
+	case 2: return Call::MISSED;
+	case 3: return Call::OUTGOING;
 	default:
-		return Call::CALL_TYPE.UNSPECIFIED;
+		return Call::UNSPECIFIED_CALL;
 	}
 }
 
 void Call::setCalledNumber(const QString& called)
 {
-	mCalledNumber = (called == NULL) ? "" : called;
+	if (!called.isEmpty()) {
+		mCalledNumber = called;
+	}
 }
 
 const QString& Call::getCalledNumber() const
@@ -42,7 +44,7 @@ const QString& Call::getCalledNumber() const
 
 void Call::setCallerNumber(const QString& caller)
 {
-	mCallerNumber = (caller == NULL) ? "" : caller;
+	mCallerNumber = (caller.isNull()) ? "" : caller;
 }
 
 const QString& Call::getCallerNumber() const
@@ -57,7 +59,9 @@ const QDate& Call::getTimeStamp() const
 
 void Call::setTimeStamp(const QDate& date)
 {
-	mTimeStamp = (date == NULL) ? new QDate(0) : date;
+	if (date.isValid()) {
+		mTimeStamp = date;
+	}
 }
 
 const QString& Call::getPartnerName() const
@@ -89,7 +93,7 @@ bool Call::isPartnerNameEmpty() const
 
 void Call::setPartnerName(const QString& partnerName)
 {
-	mPartnerName = (partnerName == NULL) ? "" : partnerName;
+	mPartnerName = (partnerName.isNull()) ? "" : partnerName;
 }
 
 Call::CALL_TYPE Call::getType() const
@@ -99,7 +103,7 @@ Call::CALL_TYPE Call::getType() const
 
 void Call::setType(CALL_TYPE type)
 {
-	mType = (type == NULL) ? Call::CALL_TYPE.UNSPECIFIED : type;
+	mType = (type.isNull()) ? Call::UNSPECIFIED : type;
 }
 
 /**
@@ -143,20 +147,20 @@ Call::EXTERN_PORT_TYPE Call::getExternPort() const
 		break;
 	}
 
-	if (number != null)
+	if (number != NULL)
 	{
-		int separator = number.indexOf(EXTERN_PORT_TYPE.TAG_SEPARATOR);
-		if (separator < 1) return EXTERN_PORT_TYPE.FIXEDLINE;
+		int separator = number.indexOf(Call::TAG_SEPARATOR);
+		if (separator < 1) return Call::FIXEDLINE;
 
 		if (number.substring(0, separator)
-			.equalsIgnoreCase(EXTERN_PORT_TYPE.TAG_SIP))
-			return EXTERN_PORT_TYPE.SIP;
+			.equalsIgnoreCase(Call::TAG_SIP))
+			return Call::SIP;
 		else if (number.substring(0, separator)
-			.equalsIgnoreCase(EXTERN_PORT_TYPE.TAG_MOBILE))
-			return EXTERN_PORT_TYPE.MOBILE;
+			.equalsIgnoreCase(Call::TAG_MOBILE))
+			return Call::MOBILE;
 	}
 
-	return EXTERN_PORT_TYPE.UNSPECIFIED;
+	return Call::UNSPECIFIED_CALL;
 }
 
 /**
@@ -177,7 +181,7 @@ const QString& Call::getInternPort() const
 */
 void Call::setInternPort(const QString& internPort)
 {
-	mInternPort = (internPort == null) ? "" : internPort;
+	mInternPort = (internPort.isNull()) ? "" : internPort;
 }
 
 /**
@@ -187,7 +191,7 @@ void Call::setInternPort(const QString& internPort)
 */
 const QString& Call::getInternNumber() const
 {
-	QString number = null;
+	QString number = NULL;
 	switch(getType())
 	{
 	case OUTGOING:
@@ -200,9 +204,9 @@ const QString& Call::getInternNumber() const
 		break;
 	}
 
-	if (number != null)
+	if (number != NULL)
 	{
-		int separator = number.indexOf(EXTERN_PORT_TYPE.TAG_SEPARATOR);
+		int separator = number.indexOf(Call::TAG_SEPARATOR);
 		if (separator < 0) return number;
 		return number.substring(separator + 1).trim();
 	}
@@ -248,7 +252,7 @@ const QString& Call::getId() const
 */
 void Call::setId(const QString& id)
 {
-	mId = (id == null) ? "" : id;
+	mId = (id.isNull()) ? "" : id;
 }
 
 /**
@@ -290,7 +294,7 @@ ContactNumber::NUMBER_TYPE Call::getNumberType() const
 */
 void Call::setNumberType(ContactNumber.NUMBER_TYPE numberType)
 {
-	mNumberType = (numberType == null) ?
+	mNumberType = (numberType.isNull()) ?
 		ContactNumber.NUMBER_TYPE.OTHER : numberType;
 }
 
@@ -339,7 +343,7 @@ const QString& Call::getPrettyCount() const
 
 bool Call::equals(QObject o)
 {
-	if (o != null) return hashCode() == o.hashCode();
+	if (o != NULL) return hashCode() == o.hashCode();
 	return false;
 }
 

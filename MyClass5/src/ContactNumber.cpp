@@ -5,7 +5,7 @@
 */
 ContactNumber::ContactNumber()
 {
-	mType = ContactNumber::NUMBER_TYPE.OTHER;
+	mType = ContactNumber::OTHER;
 	mIsHauptnummer = false;
 }
 
@@ -28,7 +28,7 @@ ContactNumber::NUMBER_TYPE ContactNumber::getType() const
 void ContactNumber::setType(NUMBER_TYPE type)
 {
 	mType = type;
-	mCustomType = "";
+	mCustomType.clear();
 }
 
 /**
@@ -39,8 +39,12 @@ void ContactNumber::setType(NUMBER_TYPE type)
 */
 void ContactNumber::setType(const QString &type)
 {
-	mType = ContactNumber::NUMBER_TYPE.OTHER;
-	mCustomType = (type == NULL) ? "" : type;
+	mType = ContactNumber::OTHER;
+	if (type.isEmpty()) {
+		mCustomType.clear();
+	} else {
+		mCustomType = type;
+	}
 }
 
 /**
@@ -104,7 +108,11 @@ const QString& ContactNumber::getNumber() const
 */
 void ContactNumber::setNumber(const QString& number)
 {
-	mNumber = (number == NULL) ? "" : number;
+	if (number.isEmpty()) {
+		mNumber.clear();
+	} else {
+		mNumber = number;
+	}
 }
 
 const QString& ContactNumber::getQuickdial() const
@@ -114,7 +122,11 @@ const QString& ContactNumber::getQuickdial() const
 
 void ContactNumber::setQuickdial(const QString& quickdial)
 {
-	mQuickdial = (quickdial == NULL) ? "" : quickdial;
+	if (quickdial.isEmpty()) {
+		mQuickdial.clear();
+	} else {
+		mQuickdial = quickdial;
+	}
 }
 
 const QString& ContactNumber::getAddressDisplay() const
