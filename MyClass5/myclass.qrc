@@ -1,3 +1,4 @@
 <RCC>
-    <qresource prefix="/MyClass5"/>
+    <qresource prefix="MyClass4">
+    </qresource>
 </RCC>
