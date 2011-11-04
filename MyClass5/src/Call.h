@@ -37,6 +37,10 @@ public:
 		FIXEDLINE, SIP, MOBILE, UNSPECIFIED_PORT
 	};
 
+	static const char TAG_SEPARATOR;
+	static const QString TAG_SIP;
+	static const QString TAG_MOBILE;
+
 	/**
 	 * Gets the call type for key. Mapping from FRITZ!Box-key
 	 * 
@@ -173,39 +177,6 @@ public:
 	 *            the new number type
 	 */
 	void setNumberType(ContactNumber::NUMBER_TYPE);
-
-	/**
-	 * Gibt Zeit und Datum des Anrufes "schön" formatiert zurück. Format:
-	 * <VollesDatum_MonatAlsText> <Uhrzeit_StundeMinute>
-	 * 
-	 * @param c
-	 *            a valid context
-	 * 
-	 * @return the pretty date full
-	 */
-	const QString& getPrettyDateFull() const;
-	
-	/**
-	 * Gets user friendly formatted call duration
-	 * 
-	 * @param c
-	 *            a valid context
-	 * @return the pretty duration string
-	 */
-	const QString& getPrettyDuration() const;
-	
-	/**
-	 * Gets user friendly formatted call count
-	 * (to be used for getCount()>1)
-	 * 
-	 * @param c
-	 *            a valid context
-	 * @return the pretty count string
-	 */
-	const QString& getPrettyCount() const;
-	
-	bool equals(QObject o);
-	int hashCode();
 
 private:
 	CALL_TYPE mType;

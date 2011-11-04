@@ -56,7 +56,7 @@ public:
 	*
 	* @return true, if is hauptnummer
 	*/
-	bool isHauptnummer() const;
+	bool isMainNumber() const;
 
 	/**
 	* Sets the hauptnummer.
@@ -64,7 +64,7 @@ public:
 	* @param isHauptnummer
 	*            the new hauptnummer
 	*/
-	void setHauptnummer(bool);
+	void setMainNumber(bool);
 
 	/**
 	* Gets the plain number.
@@ -98,7 +98,7 @@ public:
 private:
 	NUMBER_TYPE mType;
 	QString mCustomType;
-	bool mIsHauptnummer;
+	bool mIsMainNumber;
 	QString mNumber;
 	QString mQuickdial;
 };

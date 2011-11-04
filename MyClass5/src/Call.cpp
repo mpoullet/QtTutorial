@@ -1,5 +1,9 @@
 #include "Call.h"
 
+const char Call::TAG_SEPARATOR = ':';
+const QString Call::TAG_SIP = "SIP";
+const QString Call::TAG_MOBILE = "Mobilfunk";
+
 /**
 * Instantiates a new call.
 */
@@ -32,7 +36,9 @@ Call::CALL_TYPE Call::getCallTypeForKey(const QString& aQString)
 
 void Call::setCalledNumber(const QString& called)
 {
-	if (!called.isEmpty()) {
+	if (called.isEmpty()) {
+		mCalledNumber.clear();
+	} else {
 		mCalledNumber = called;
 	}
 }
@@ -44,7 +50,11 @@ const QString& Call::getCalledNumber() const
 
 void Call::setCallerNumber(const QString& caller)
 {
-	mCallerNumber = (caller.isNull()) ? "" : caller;
+	if (caller.isEmpty()) {
+		mCallerNumber.clear();
+	} else {
+		mCallerNumber = caller;
+	}
 }
 
 const QString& Call::getCallerNumber() const
@@ -76,9 +86,11 @@ const QString& Call::getPartnerName() const
 */
 const QString& Call::getPartnerNameIfEmptyNumber() const
 {
-	if (isPartnerNameEmpty())
+	if (isPartnerNameEmpty()) {
 		return getPartnerNumber();
-	return getPartnerName();
+	} else {
+		return getPartnerName();
+	}
 }
 
 /**
@@ -88,12 +100,16 @@ const QString& Call::getPartnerNameIfEmptyNumber() const
 */
 bool Call::isPartnerNameEmpty() const
 {
-	return getPartnerName().length() == 0;
+	return getPartnerName().isEmpty();
 }
 
 void Call::setPartnerName(const QString& partnerName)
 {
-	mPartnerName = (partnerName.isNull()) ? "" : partnerName;
+	if (partnerName.isEmpty()) {
+		mPartnerName.clear();
+	} else {
+		mPartnerName = partnerName;
+	}
 }
 
 Call::CALL_TYPE Call::getType() const
@@ -103,7 +119,11 @@ Call::CALL_TYPE Call::getType() const
 
 void Call::setType(CALL_TYPE type)
 {
-	mType = (type.isNull()) ? Call::UNSPECIFIED : type;
+	if (type >= Call::MISSED && type <= Call::UNSPECIFIED_CALL) {
+		mType = type;
+	} else {
+		mType = Call::UNSPECIFIED_CALL;
+	}
 }
 
 /**
@@ -113,6 +133,9 @@ void Call::setType(CALL_TYPE type)
 */
 const QString& Call::getPartnerNumber() const
 {
+	// TODO: find a better workaround
+	static const QString null;
+
 	switch(getType())
 	{
 	case OUTGOING:
@@ -123,7 +146,7 @@ const QString& Call::getPartnerNumber() const
 		return mCallerNumber;
 	}
 
-	return "";
+	return null;
 }
 
 /**
@@ -134,7 +157,7 @@ const QString& Call::getPartnerNumber() const
 */
 Call::EXTERN_PORT_TYPE Call::getExternPort() const
 {
-	QString number = NULL;
+	QString number;
 	switch(getType())
 	{
 	case OUTGOING:
@@ -147,20 +170,20 @@ Call::EXTERN_PORT_TYPE Call::getExternPort() const
 		break;
 	}
 
-	if (number != NULL)
+	if (!number.isEmpty())
 	{
 		int separator = number.indexOf(Call::TAG_SEPARATOR);
 		if (separator < 1) return Call::FIXEDLINE;
 
-		if (number.substring(0, separator)
-			.equalsIgnoreCase(Call::TAG_SIP))
+		if (number.mid(0, separator)
+			.compare(Call::TAG_SIP, Qt::CaseInsensitive))
 			return Call::SIP;
-		else if (number.substring(0, separator)
-			.equalsIgnoreCase(Call::TAG_MOBILE))
+		else if (number.mid(0, separator)
+			.compare(Call::TAG_MOBILE, Qt::CaseInsensitive))
 			return Call::MOBILE;
 	}
 
-	return Call::UNSPECIFIED_CALL;
+	return Call::UNSPECIFIED_PORT;
 }
 
 /**
@@ -181,7 +204,11 @@ const QString& Call::getInternPort() const
 */
 void Call::setInternPort(const QString& internPort)
 {
-	mInternPort = (internPort.isNull()) ? "" : internPort;
+	if (internPort.isEmpty()) {
+		mInternPort.clear();
+	} else {
+		mInternPort = internPort;
+	}
 }
 
 /**
@@ -191,7 +218,10 @@ void Call::setInternPort(const QString& internPort)
 */
 const QString& Call::getInternNumber() const
 {
-	QString number = NULL;
+	// TODO: find a better workaround
+	static const QString null;
+
+	QString number;
 	switch(getType())
 	{
 	case OUTGOING:
@@ -204,13 +234,13 @@ const QString& Call::getInternNumber() const
 		break;
 	}
 
-	if (number != NULL)
+	if (!number.isEmpty())
 	{
 		int separator = number.indexOf(Call::TAG_SEPARATOR);
 		if (separator < 0) return number;
-		return number.substring(separator + 1).trim();
+		return number.left(separator + 1).trimmed();
 	}
-	return "";
+	return null;
 }
 
 /**
@@ -252,7 +282,11 @@ const QString& Call::getId() const
 */
 void Call::setId(const QString& id)
 {
-	mId = (id.isNull()) ? "" : id;
+	if (id.isEmpty()) {
+		mId.clear();
+	} else {
+		mId = id;
+	}
 }
 
 /**
@@ -292,72 +326,11 @@ ContactNumber::NUMBER_TYPE Call::getNumberType() const
 * @param numberType
 *            the new number type
 */
-void Call::setNumberType(ContactNumber.NUMBER_TYPE numberType)
+void Call::setNumberType(ContactNumber::NUMBER_TYPE numberType)
 {
-	mNumberType = (numberType.isNull()) ?
-		ContactNumber.NUMBER_TYPE.OTHER : numberType;
+	if ((numberType >= ContactNumber::HOME) && (numberType <= ContactNumber::OTHER)) {
+		mNumberType = numberType;
+	} else {
+		mNumberType = ContactNumber::OTHER;
+	}
 }
-
-/**
-* Gibt Zeit und Datum des Anrufes "schön" formatiert zurück. Format:
-* <VollesDatum_MonatAlsText> <Uhrzeit_StundeMinute>
-* 
-* @param c
-*            a valid context
-* 
-* @return the pretty date full
-*/
-const QString& Call::getPrettyDateFull() const
-{
-	return DateFormat.getMediumDateFormat(c).format(getTimeStamp()) + " "
-		+ DateFormat.getTimeFormat(c).format(getTimeStamp());
-}
-
-/**
-* Gets user friendly formatted call duration
-* 
-* @param c
-*            a valid context
-* @return the pretty duration string
-*/
-const QString& Call::getPrettyDuration() const
-{
-	return QString.format(c.getQString(R.string.call_log_duration_fmt),
-		getDuration());
-}
-
-/**
-* Gets user friendly formatted call count
-* (to be used for getCount()>1)
-* 
-* @param c
-*            a valid context
-* @return the pretty count string
-*/
-const QString& Call::getPrettyCount() const
-{
-	return QString.format(c.getQString(R.string.call_log_count_fmt),
-		getCount());
-}
-
-
-bool Call::equals(QObject o)
-{
-	if (o != NULL) return hashCode() == o.hashCode();
-	return false;
-}
-
-
-int Call::hashCode()
-{
-	int result = 17;
-	result = 31 * result + mType.hashCode();
-	result = 31 * result + mTimeStamp.hashCode();
-	result = 31 * result + mCalledNumber.hashCode();
-	result = 31 * result + mCallerNumber.hashCode();
-	result = 31 * result + mInternPort.hashCode();
-	result = 31 * result + mCount;
-	result = 31 * result + mId.hashCode();
-	return result;
-}
-

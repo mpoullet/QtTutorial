@@ -31,11 +31,21 @@
     </ClCompile>
     <ClCompile Include="src\Call.cpp" />
     <ClCompile Include="src\Call.h" />
+    <ClCompile Include="src\CallLog.cpp" />
+    <ClCompile Include="src\Contact.cpp" />
+    <ClCompile Include="src\ContactEmail.cpp" />
     <ClCompile Include="src\ContactNumber.cpp" />
     <ClCompile Include="src\GetVoIPConfClientInfo.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MyClass.cpp" />
+    <ClCompile Include="src\PhoneBook.cpp" />
+    <ClCompile Include="src\SAXCallLogHandler.cpp" />
+    <ClCompile Include="src\SAXPhoneBookHandler.cpp" />
     <ClCompile Include="src\SoapWidget.cpp" />
+    <ClCompile Include="src\TamInfo.cpp" />
+    <ClCompile Include="src\VoIPClientInfo.cpp" />
+    <ClCompile Include="src\VoIPInfoEx.cpp" />
+    <ClCompile Include="src\WLANInfo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="src\MyClass.h">
@@ -77,8 +87,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_myclass.h" />
+    <ClInclude Include="src\CallLog.h" />
+    <ClInclude Include="src\Contact.h" />
+    <ClInclude Include="src\ContactEmail.h" />
     <ClInclude Include="src\ContactNumber.h" />
     <ClInclude Include="src\GetVoIPConfClientInfo.h" />
+    <ClInclude Include="src\PhoneBook.h" />
+    <ClInclude Include="src\SAXCallLogHandler.h" />
+    <ClInclude Include="src\SAXPhoneBookHandler.h" />
+    <ClInclude Include="src\TamInfo.h" />
+    <ClInclude Include="src\VoIPClientInfo.h" />
+    <ClInclude Include="src\VoIPInfoEx.h" />
+    <ClInclude Include="src\WLANInfo.h" />
     <CustomBuild Include="src\SoapWidget.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Identity)...</Message>

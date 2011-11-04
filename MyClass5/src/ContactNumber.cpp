@@ -6,7 +6,7 @@
 ContactNumber::ContactNumber()
 {
 	mType = ContactNumber::OTHER;
-	mIsHauptnummer = false;
+	mIsMainNumber = false;
 }
 
 /**
@@ -52,20 +52,20 @@ void ContactNumber::setType(const QString &type)
 *
 * @return true, if is hauptnummer
 */
-bool ContactNumber::isHauptnummer() const
+bool ContactNumber::isMainNumber() const
 {
-	return mIsHauptnummer;
+	return mIsMainNumber;
 }
 
 /**
 * Sets the hauptnummer.
 *
-* @param isHauptnummer
+* @param isMainNumber
 *            the new hauptnummer
 */
-void ContactNumber::setHauptnummer(bool isHauptnummer)
+void ContactNumber::setMainNumber(bool isMainNumber)
 {
-	mIsHauptnummer = isHauptnummer;
+	mIsMainNumber = isMainNumber;
 }
 
 /**
@@ -85,18 +85,6 @@ const QString& ContactNumber::getNumberRaw() const
 */
 const QString& ContactNumber::getNumber() const
 {
-	if (mNumber.indexOf("@") >= 0)
-	{
-		// for SIP address as number return internal shortcut number
-		QString quickdial = getQuickdial();
-		switch (quickdial.length())
-		{
-		case 1: return "**70" + quickdial;
-		case 2: return "**7" + quickdial;
-		}
-		return "";
-	}
-
 	return mNumber;
 }
 
