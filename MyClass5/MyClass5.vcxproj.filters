@@ -34,23 +34,8 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MyClass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_MyClass.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_MyClass.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\qrc_myclass.cpp">
       <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\SoapWidget.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_SoapWidget.cpp">
       <Filter>Generated Files\Debug</Filter>
@@ -58,53 +43,53 @@
     <ClCompile Include="GeneratedFiles\Release\moc_SoapWidget.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="src\GetVoIPConfClientInfo.cpp">
+    <ClCompile Include="src\model\Call.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Call.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Call.cpp">
+    <ClCompile Include="src\model\WLANInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\ContactNumber.cpp">
+    <ClCompile Include="src\model\CallLog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\ContactEmail.cpp">
+    <ClCompile Include="src\model\Contact.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\TamInfo.cpp">
+    <ClCompile Include="src\model\ContactEmail.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\VoIPClientInfo.cpp">
+    <ClCompile Include="src\model\ContactNumber.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\VoIPInfoEx.cpp">
+    <ClCompile Include="src\soap\GetVoIPConfClientInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\WLANInfo.cpp">
+    <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Contact.cpp">
+    <ClCompile Include="src\model\PhoneBook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\CallLog.cpp">
+    <ClCompile Include="src\sax\SAXCallLogHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\SAXCallLogHandler.cpp">
+    <ClCompile Include="src\sax\SAXPhoneBookHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\PhoneBook.cpp">
+    <ClCompile Include="src\SoapWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\SAXPhoneBookHandler.cpp">
+    <ClCompile Include="src\model\TamInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\model\VoIPClientInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\model\VoIPInfoEx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="src\MyClass.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="myclass.qrc">
       <Filter>Resource Files</Filter>
     </CustomBuild>
@@ -119,40 +104,43 @@
     <ClInclude Include="GeneratedFiles\ui_myclass.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\GetVoIPConfClientInfo.h">
+    <ClInclude Include="src\model\Call.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\ContactNumber.h">
+    <ClInclude Include="src\model\CallLog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\ContactEmail.h">
+    <ClInclude Include="src\model\Contact.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\TamInfo.h">
+    <ClInclude Include="src\model\ContactEmail.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\VoIPClientInfo.h">
+    <ClInclude Include="src\model\ContactNumber.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\VoIPInfoEx.h">
+    <ClInclude Include="src\soap\GetVoIPConfClientInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\WLANInfo.h">
+    <ClInclude Include="src\model\PhoneBook.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Contact.h">
+    <ClInclude Include="src\sax\SAXCallLogHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\CallLog.h">
+    <ClInclude Include="src\sax\SAXPhoneBookHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\SAXCallLogHandler.h">
+    <ClInclude Include="src\model\TamInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\PhoneBook.h">
+    <ClInclude Include="src\model\VoIPClientInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\SAXPhoneBookHandler.h">
+    <ClInclude Include="src\model\VoIPInfoEx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\model\WLANInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

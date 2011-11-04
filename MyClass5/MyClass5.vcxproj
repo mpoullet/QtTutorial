@@ -11,9 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GeneratedFiles\Debug\moc_MyClass.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_SoapWidget.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -23,41 +20,24 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_MyClass.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_SoapWidget.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="src\Call.cpp" />
-    <ClCompile Include="src\Call.h" />
-    <ClCompile Include="src\CallLog.cpp" />
-    <ClCompile Include="src\Contact.cpp" />
-    <ClCompile Include="src\ContactEmail.cpp" />
-    <ClCompile Include="src\ContactNumber.cpp" />
-    <ClCompile Include="src\GetVoIPConfClientInfo.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\MyClass.cpp" />
-    <ClCompile Include="src\PhoneBook.cpp" />
-    <ClCompile Include="src\SAXCallLogHandler.cpp" />
-    <ClCompile Include="src\SAXPhoneBookHandler.cpp" />
+    <ClCompile Include="src\model\Call.cpp" />
+    <ClCompile Include="src\model\CallLog.cpp" />
+    <ClCompile Include="src\model\Contact.cpp" />
+    <ClCompile Include="src\model\ContactEmail.cpp" />
+    <ClCompile Include="src\model\ContactNumber.cpp" />
+    <ClCompile Include="src\model\PhoneBook.cpp" />
+    <ClCompile Include="src\model\TamInfo.cpp" />
+    <ClCompile Include="src\model\VoIPClientInfo.cpp" />
+    <ClCompile Include="src\model\VoIPInfoEx.cpp" />
+    <ClCompile Include="src\model\WLANInfo.cpp" />
+    <ClCompile Include="src\sax\SAXCallLogHandler.cpp" />
+    <ClCompile Include="src\sax\SAXPhoneBookHandler.cpp" />
     <ClCompile Include="src\SoapWidget.cpp" />
-    <ClCompile Include="src\TamInfo.cpp" />
-    <ClCompile Include="src\VoIPClientInfo.cpp" />
-    <ClCompile Include="src\VoIPInfoEx.cpp" />
-    <ClCompile Include="src\WLANInfo.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <CustomBuild Include="src\MyClass.h">
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Identity)...</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"   -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_NETWORK_LIB  "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\qtmain" "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtXml" "-I$(QTDIR)\include\QtNetwork" "-I$(SolutionDir)\..\qt-solutions\qtsoap\src" "-I." "-I." "-I." "src\MyClass.h" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing %(Identity)...</Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"   -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_NETWORK_LIB  "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\qtmain" "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtXml" "-I$(QTDIR)\include\QtNetwork" "-I$(SolutionDir)\..\qt-solutions\qtsoap\src" "-I." "-I." "-I." "src\MyClass.h" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"</Command>
-    </CustomBuild>
+    <ClCompile Include="src\soap\GetVoIPConfClientInfo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="myclass.qrc">
@@ -87,23 +67,24 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_myclass.h" />
-    <ClInclude Include="src\CallLog.h" />
-    <ClInclude Include="src\Contact.h" />
-    <ClInclude Include="src\ContactEmail.h" />
-    <ClInclude Include="src\ContactNumber.h" />
-    <ClInclude Include="src\GetVoIPConfClientInfo.h" />
-    <ClInclude Include="src\PhoneBook.h" />
-    <ClInclude Include="src\SAXCallLogHandler.h" />
-    <ClInclude Include="src\SAXPhoneBookHandler.h" />
-    <ClInclude Include="src\TamInfo.h" />
-    <ClInclude Include="src\VoIPClientInfo.h" />
-    <ClInclude Include="src\VoIPInfoEx.h" />
-    <ClInclude Include="src\WLANInfo.h" />
+    <ClInclude Include="src\model\Call.h" />
+    <ClInclude Include="src\model\CallLog.h" />
+    <ClInclude Include="src\model\Contact.h" />
+    <ClInclude Include="src\model\ContactEmail.h" />
+    <ClInclude Include="src\model\ContactNumber.h" />
+    <ClInclude Include="src\model\PhoneBook.h" />
+    <ClInclude Include="src\model\TamInfo.h" />
+    <ClInclude Include="src\model\VoIPClientInfo.h" />
+    <ClInclude Include="src\model\VoIPInfoEx.h" />
+    <ClInclude Include="src\model\WLANInfo.h" />
+    <ClInclude Include="src\sax\SAXCallLogHandler.h" />
+    <ClInclude Include="src\sax\SAXPhoneBookHandler.h" />
+    <ClInclude Include="src\soap\GetVoIPConfClientInfo.h" />
     <CustomBuild Include="src\SoapWidget.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Identity)...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_NETWORK_LIB "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\qtmain" "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtXml" "-I$(QTDIR)\include\QtNetwork" "-I$(SolutionDir)\..\qt-solutions\qtsoap\src" "-I." "-I." "-I."</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"   -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_NETWORK_LIB  "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\qtmain" "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtXml" "-I$(QTDIR)\include\QtNetwork" "-I$(SolutionDir)\..\qt-solutions\qtsoap\src" "-I$(SolutionDir)\MyClass5\src\soap" "-I$(SolutionDir)\MyClass5\src\model" "-I$(SolutionDir)\MyClass5\src\sax" "-I." "-I." "-I." "src\SoapWidget.h" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing %(Identity)...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
@@ -148,7 +129,7 @@
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\qtmain;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtXml;$(QTDIR)\include\QtNetwork;$(SolutionDir)\..\qt-solutions\qtsoap\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\qtmain;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtXml;$(QTDIR)\include\QtNetwork;$(SolutionDir)\..\qt-solutions\qtsoap\src;$(SolutionDir)\MyClass5\src\soap;$(SolutionDir)\MyClass5\src\model;$(SolutionDir)\MyClass5\src\sax;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
     </ClCompile>
     <Link>

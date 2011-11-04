@@ -4,5 +4,6 @@
     <QTDIR>C:\Qt\4.7.4</QTDIR>
     <LocalDebuggerEnvironment Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">PATH=$(QTDIR)\bin%3b$(PATH)</LocalDebuggerEnvironment>
     <LocalDebuggerEnvironment Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">PATH=$(QTDIR)\bin%3b$(PATH)</LocalDebuggerEnvironment>
+    <ShowAllFiles>false</ShowAllFiles>
   </PropertyGroup>
 </Project>
